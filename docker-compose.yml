@@ -1,0 +1,32 @@
+version: '3'
+services:
+    # Other Services here ... depending on our own setup
+    elasticsearch:
+        image: 'elasticsearch:7.13.4'
+        environment:
+            - discovery.type=single-node
+        ports:
+            - '9200:9200'
+            - '9300:9300'
+        volumes:
+            - 'sailelasticsearch:/usr/share/elasticsearch/data'
+        networks:
+            - sail
+    kibana:
+        image: 'kibana:7.13.4'
+        environment:
+            - elasticsearch.hosts=http://elasticsearch:9200
+        ports:
+            - '5601:5601'
+        networks:
+            - sail
+        depends_on:
+            - elasticsearch
+volumes:
+    # Other volumes here ...
+    sailelasticsearch:
+        driver: local  
+
+networks:
+  sail:
+    driver: bridge
