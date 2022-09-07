@@ -1,6 +1,5 @@
-version: '3'
+version: '3.3'
 services:
-    # Other Services here ... depending on our own setup
     elasticsearch:
         image: 'elasticsearch:7.13.4'
         environment:
@@ -23,7 +22,6 @@ services:
         depends_on:
             - elasticsearch
 volumes:
-    # Other volumes here ...
     sailelasticsearch:
         driver: local  
 

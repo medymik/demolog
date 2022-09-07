@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    try {
+        Log::error('this is a log', ['test context']);
+    } catch (\Throwable $th) {
+        return $th;
+    }
     return view('welcome');
 });
